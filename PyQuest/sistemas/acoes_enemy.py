@@ -37,7 +37,8 @@ def receber_inimigo(game):
         game.player_status.life -= game.enemy_status.damage
 
         if(game.player_status.life <= 0):
-            print("Voce morreu")
+            print("\033[91m VOCÊ MORREU \033[0m")
+            game.running = False
 
     # Desenha o ataque
     pygame.draw.rect(game.window, (255, 120, 120), enemy_acao)

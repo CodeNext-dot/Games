@@ -33,6 +33,7 @@ class Game:
         self.Player = Player
         self.Enemy = Enemy
         self.Npc = Npc
+        self.running = True
 game = Game(window, player_status, enemy_status, npc_status, Player, Enemy, Npc)
 
 # função da janela 2
@@ -40,13 +41,17 @@ def prompt_acoes():
     action_prompt.receber_input(resposta_status, game.player_status)
 threading.Thread(target=prompt_acoes, daemon=True).start()
 
+# musica
+pygame.mixer.music.load("utilidades/assets/sounds/PitcherPerfectTheme.ogg")
+pygame.mixer.music.set_volume(0.3)
+pygame.mixer.music.play(-1)
+
 # função principal
-running = True
-while running:
+while game.running:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            game.running = False
 
     if resposta_status.resposta:
         for resposta in resposta_status.resposta.split('-'):

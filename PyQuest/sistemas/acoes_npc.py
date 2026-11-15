@@ -21,7 +21,7 @@ def receber_interacao(game):
         print(f"Seu dinheiro: ${game.player_status.money:.2f}\n")
 
         print(f"[1] Aumentar dano em +5, por R${preco_dano}")
-        print(f"[2] Aumentar vida máxima em +20, por R${preco_vida}")
+        print(f"[2] Aumentar vida máxima em +60, por R${preco_vida}")
         print("[3] Sair")
 
         resposta = input("\nO que deseja comprar? ").lower()
@@ -36,7 +36,7 @@ def receber_interacao(game):
                 game.player_status.damage += 5
 
                 print("\nVendedor: Uma arma mais forte...")
-                print("Dano aumentado em +5!")
+                print("\033[92mDano aumentado em +5!\033[0m")
 
             else:
                 print("\nVendedor: Parece que suas moedas não são suficientes.")
@@ -47,10 +47,10 @@ def receber_interacao(game):
             if game.player_status.money >= preco_vida:
 
                 game.player_status.money -= preco_vida
-                game.player_status.life += 20
+                game.player_status.life += 60
 
                 print("\nVendedor: Cuide-se. Você ainda vai precisar disso.")
-                print("Vida aumentada em +20!")
+                print("\033[92mVida aumentada em +60!\033[0m")
 
             else:
                 print("\nVendedor: Volte quando tiver mais dinheiro.")
