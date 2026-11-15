@@ -16,17 +16,29 @@ clock = pygame.time.Clock()
 player_status = game_classes.Player_status()
 enemy_status = game_classes.Enemy_status()
 resposta_status = game_classes.GameData()
+npc_status = game_classes.Npc_status()
 
 # objetos
 Player = pygame.Rect(window.get_width() / 2, window.get_height() - 50, 50, 50)
 Enemy = pygame.Rect(random.randrange(50, 451, 50), random.randrange(50, 401, 50), 50, 50)
+Npc = pygame.Rect(0, 0, 50, 50)
+
+# agrupamento
+class Game:
+    def __init__(self, window, player_status, enemy_status, npc_status, Player, Enemy, Npc):
+        self.window = window
+        self.player_status = player_status
+        self.enemy_status = enemy_status
+        self.npc_status = npc_status
+        self.Player = Player
+        self.Enemy = Enemy
+        self.Npc = Npc
+game = Game(window, player_status, enemy_status, npc_status, Player, Enemy, Npc)
 
 # função da janela 2
 def prompt_acoes():
-    action_prompt.receber_input(resposta_status, player_status)
+    action_prompt.receber_input(resposta_status, game.player_status)
 threading.Thread(target=prompt_acoes, daemon=True).start()
-
-# ações do bixos
 
 # função principal
 running = True
@@ -38,12 +50,12 @@ while running:
 
     if resposta_status.resposta:
         for resposta in resposta_status.resposta.split('-'):
-            player_actions.receber_resposta(resposta, Player, Enemy, window)
-            atualizar.atualizar_windows(window, player_status, enemy_status, Player, Enemy, True)
+            player_actions.receber_resposta(resposta, game)
+            atualizar.atualizar_windows(game, True)
         
         resposta_status.resposta = ""
         
-    atualizar.atualizar_windows(window, player_status, enemy_status, Player, Enemy)
+    atualizar.atualizar_windows(game)
     clock.tick(60)
 
 pygame.quit()
