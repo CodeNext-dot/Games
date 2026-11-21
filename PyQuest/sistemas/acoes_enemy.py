@@ -1,4 +1,5 @@
 import pygame
+import sistemas.acoes_musics as action_music
 
 def receber_inimigo(game):
 
@@ -33,6 +34,8 @@ def receber_inimigo(game):
 
     # verifica se ataque bateu no player
     if (enemy_acao.colliderect(game.Player)) and (game.player_status.life > 0):
+        action_music.som_ataque()
+
         print(f"O ataque do inimigo te acertou!")
         game.player_status.life -= game.enemy_status.damage
 

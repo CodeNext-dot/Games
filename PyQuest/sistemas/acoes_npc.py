@@ -1,4 +1,5 @@
 import pygame
+import sistemas.acoes_musics as action_music
 
 def receber_interacao(game):
 
@@ -29,8 +30,8 @@ def receber_interacao(game):
 
         # AUMENTAR DANO
         if resposta == "1":
-
             if game.player_status.money >= preco_dano:
+                action_music.som_aprimoramento()
 
                 game.player_status.money -= preco_dano
                 game.player_status.damage += 5
@@ -45,6 +46,7 @@ def receber_interacao(game):
         # AUMENTAR VIDA
         elif resposta == "2":
             if game.player_status.money >= preco_vida:
+                action_music.som_aprimoramento()
 
                 game.player_status.money -= preco_vida
                 game.player_status.life += 60

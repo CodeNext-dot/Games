@@ -1,8 +1,8 @@
 # bibliotecas
 import pygame, threading, random
-# import sistemas.acoes_enemy as enemy_actions
 import sistemas.acoes_player as player_actions
 import sistemas.prompt_acoes as action_prompt
+import sistemas.acoes_musics as action_music
 import entidades.classes as game_classes
 import utilidades.atualizar_window as atualizar
 
@@ -41,18 +41,13 @@ def prompt_acoes():
     action_prompt.receber_input(resposta_status, game.player_status)
 threading.Thread(target=prompt_acoes, daemon=True).start()
 
-# musica
-pygame.mixer.music.load("utilidades/assets/sounds/PitcherPerfectTheme.ogg")
-pygame.mixer.music.set_volume(0.3)
-pygame.mixer.music.play(-1)
-
 # função principal
 while game.running:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game.running = False
-
+    
     if resposta_status.resposta:
         for resposta in resposta_status.resposta.split('-'):
             player_actions.receber_resposta(resposta, game)

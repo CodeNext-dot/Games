@@ -1,9 +1,13 @@
 import os
 import entidades.classes as game_classes
+import sistemas.acoes_musics as action_music
 
 def receber_input(resposta_status: game_classes.GameData, player_status: game_classes.Player_status):
     # Limpa o prompt
     os.system("cls")
+
+    # musica
+    action_music.musica_menu()
 
     # Menu de cadastro
     print("\033[96m" + "="*20 + " BEM VINDO AO CADASTRO DO JOGADOR " + "="*20 + "\033[0m")
@@ -19,10 +23,16 @@ def receber_input(resposta_status: game_classes.GameData, player_status: game_cl
     # Cores e tutorial
     if player_status.person == 1:
         player_status.color = (0, 0, 255)
+        player_status.skill = "dinheiro"
+
     elif player_status.person == 2:
         player_status.color = (255, 0, 0)
+        player_status.skill = "força"
+
     elif player_status.person == 3:
         player_status.color = (0, 255, 0)
+        player_status.skill = "vida"
+        
     else:
         player_status.color = (255, 255, 255)
 
@@ -42,6 +52,9 @@ def receber_input(resposta_status: game_classes.GameData, player_status: game_cl
             "================================"
             "\033[0m"
         )
+
+    # musica
+    action_music.musica_ambiente()
 
     # Dados de resposta e informações
     while True:

@@ -1,4 +1,5 @@
 import pygame, random
+import sistemas.acoes_musics as action_music
 
 def atualizar_windows(game, resposta=False):
     pygame.display.flip()
@@ -24,6 +25,28 @@ def atualizar_windows(game, resposta=False):
         else:
             game.enemy_status.life = 0
 
+        # ativando habilidades
+        if(game.player_status.skill == "dinheiro"):
+            print("\033[92mHabilidade ativada!  +5.00R$\033[0m")
+            action_music.som_aprimoramento()
+
+            game.player_status.money += 5
+
+        elif(game.player_status.skill == "força"):
+            print("\033[92mHabilidade ativada! +1 força\033[0m")
+            action_music.som_aprimoramento()
+
+            game.player_status.damage += 1
+
+        elif(game.player_status.skill == "vida"):
+            print("\033[92mHabilidade ativada! +10 vida\033[0m")
+            action_music.som_aprimoramento()
+
+            game.player_status.life += 10
+
+        else:
+            pass
+        
     # inimigo, npc e player
     pygame.draw.rect(game.window, game.player_status.color, game.Player)
 
@@ -43,5 +66,8 @@ def atualizar_windows(game, resposta=False):
     # COLISÃO COM OS PORTÕES
     if game.Player.colliderect(gate_left) or game.Player.colliderect(gate_right):
         game.Player.move_ip(0, 50)
+
+    # mostrando a fase
+    pygame.display.set_caption(f"PyQuest level: {game.enemy_status.level:.1f}")
 
     pygame.display.flip()

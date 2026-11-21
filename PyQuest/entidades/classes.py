@@ -6,6 +6,7 @@ class Player_status:
         self.damage = 5
         self.money = 0
         self.color = (0, 0, 0)
+        self.skill = ""
 
 class Enemy_status:
     def __init__(self):
