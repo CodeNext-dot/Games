@@ -26,17 +26,18 @@ def receber_resposta(resposta, game):
             action_music.som_movimento()
 
         # verificar colisão com o inimigo
-        if (game.Player.colliderect(game.Enemy)):
-            action_music.som_ataque()
+        if(game.Player.colliderect(game.Enemy)):
+            if(game.enemy_status.life > 0):
+                action_music.som_ataque()
 
-            print("\033[91mVocê atingiu o inimigo! -10 vida\033[0m")
-            game.Player.move_ip(0, 50)
+                print("\033[91mVocê atingiu o inimigo! -10 vida\033[0m")
+                game.Player.move_ip(0, 50)
 
-            game.player_status.life -= 10
-            
-            if(game.player_status.life <= 0):
-                print("\033[91m VOCÊ MORREU \033[0m")
-                game.running = False
+                game.player_status.life -= 10
+                
+                if(game.player_status.life <= 0):
+                    print("\033[91m VOCÊ MORREU \033[0m")
+                    game.running = False
 
     elif 'e' in resposta or 'q' in resposta:
 
